@@ -1,13 +1,44 @@
+const fs = require('fs');
 const path = require('path');
 
-// console.log(path.basename(__filename));
+fs.mkdir(path.join(__dirname, 'notes'), { recursive: true }, (err, p) => {
+  if (err) throw err;
+  console.log('Папка создана');
+  console.log(p);
+});
 
-// console.log(path.dirname(__filename));
-// console.log(path.dirname(__dirname));
-// console.log(__dirname);
+fs.writeFile(
+  path.join(__dirname, 'notes', 'mynotes.txt'),
+  'Hello world!',
+  (err) => {
+    if (err) throw err;
+    console.log('Файл был создан');
+  }
+);
 
-// console.log(path.extname(__filename));
-// console.log(path.parse(__filename));
+fs.appendFile(
+  path.join(__dirname, 'notes', 'mynotes.txt'),
+  ' From append file',
+  (err) => {
+    if (err) throw err;
+    console.log('Файл был изменен');
+  }
+);
 
-console.log(path.join(__dirname, '../test', 'second.html'));
-console.log(path.resolve(path.resolve('/bar', '/foo', 'style.css')));
+fs.readFile(
+  path.join(__dirname, 'notes', 'mynotes.txt'),
+  'utf-8',
+  (err, data) => {
+    if (err) throw err;
+    console.log(data);
+  }
+);
+
+fs.rename(
+  path.join(__dirname, 'notes', 'mynotes.txt'),
+  path.join(__dirname, 'notes', 'notes.txt'),
+  (err) => {
+    if (err) throw err;
+    console.log('Файл переименован');
+  }
+);
