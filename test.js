@@ -1,21 +1,30 @@
-const { stdin, stdout, exit } = process;
+const { stdout } = process;
 
-stdout.write('Enter your name ');
-stdin.on('data', (name) => {
-  const nameStr = name.toString().split('').reverse().join('');
-  stdout.write(`\nYour reverse name is: ${nameStr}`);
-  exit();
-});
-process.on('exit', () => {
-  stdout.write('\nGoodluck!');
-});
+// const flagIndex = process.argv.indexOf('-m');
+// if (flagIndex !== -1) {
+//   const message = process.argv[flagIndex + 1];
+//   stdout.write(message);
+// }
 
-// const { stdin, stdout } = process;
+// function getValue(flag) {
+//   const flagIndex = process.argv.indexOf(flag);
+//   return flagIndex !== -1 ? process.argv[flagIndex + 1] : null;
+// }
+// stdout.write(getValue('-m'));
 
-// stdout.write('Как тебя зовут?\n');
-// stdin.on('data', (data) => {
-//   const name = data.toString();
-//   const reverseName = name.split('').reverse().join('');
-//   stdout.write(`\nТвоё имя наоборот ${reverseName}`);
-//   process.exit();
-// });
+// const protoObj = {
+//   sayHi() {
+//     stdout.write('Hi!');
+//   },
+// };
+
+// const obj = {};
+// obj.__proto__ = protoObj;
+// obj.sayHi();
+
+const productionMode = process.env.PRODUCTION === 'true';
+if (productionMode) {
+  stdout.write('Application is running in production mode');
+} else {
+  stdout.write('Application is running in development mode');
+}
