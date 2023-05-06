@@ -1,10 +1,9 @@
-const { stdin, stdout, stderr } = process;
-stdin.on('data', (data) => stdout.write(data));
-process.on('exit', (code) => {
-  if (code === 0) {
-    stdout.write('OK');
-  } else {
-    stderr.write(`Something get wrong! Programm end with code ${code}`);
-  }
+const { stdin, stdout } = process;
+stdout.write('Enter your name \n');
+stdin.on('data', (name) => {
+  stdout.write(`Hello, ${name}`);
+  process.exit();
 });
-process.exit(55);
+process.on('exit', () => {
+  stdout.write('Goodbye');
+});
