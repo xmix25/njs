@@ -1,17 +1,13 @@
-const { stdout, exit } = process;
+const path = require('path');
 
-const flag = process.argv[2];
-const availableFlas = ['-d', '-f'];
-process.on('exit', (code) => {
-  if (code === 1) {
-    stdout.write('start with "-d" or "-f" flag');
-  } else {
-    stdout.write('\nBye');
-  }
-});
-if (!flag || !availableFlas.includes(flag)) {
-  exit(1);
-}
-const value = flag === '-d' ? __dirname : __filename;
-stdout.write(value);
-exit();
+// console.log(path.basename(__filename));
+
+// console.log(path.dirname(__filename));
+// console.log(path.dirname(__dirname));
+// console.log(__dirname);
+
+// console.log(path.extname(__filename));
+// console.log(path.parse(__filename));
+
+console.log(path.join(__dirname, '../test', 'second.html'));
+console.log(path.resolve(path.resolve('/bar', '/foo', 'style.css')));
