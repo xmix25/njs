@@ -1,25 +1,20 @@
-const os = require('os');
+const http = require('http');
+const fs = require('fs');
 
-// Платформа
-console.log(os.platform());
+const PORT = 3000;
 
-// Архитектура
-console.log(os.arch());
+const requestHandler = (request, response) => {
+  const { method, url } = request;
+  console.log(`Получен ${method}-запрос на ${url}`);
+  fs.readFile('page.html', (err, data) => {
+    if (err) return console.error(err.message);
+    response.write(data.toString());
+    response.end('<div style="font-size: 3rem; color: #00ff00">!!!</div>');
+  });
+};
 
-// Информация о CPU
-console.log(os.cpus());
+const server = http.createServer(requestHandler);
 
-// Общий объём памяти
-console.log(os.totalmem());
-
-// Объём свободной памяти
-console.log(os.freemem());
-
-// Корневая директория
-console.log(os.homedir());
-
-// Время работы системы
-console.log(os.uptime());
-
-// Символ окончания строки в данной системе
-console.log(os.EOL);
+server.listen(PORT, 'localhost', () => {
+  console.log(`Сервер запущен на порту ${PORT}`);
+});
